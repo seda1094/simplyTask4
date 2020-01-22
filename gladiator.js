@@ -6,13 +6,14 @@ class Gladiator {
         this.health = health;
         this.power = power;
         this.speed = speed;
+        this.speedTimer = 0;
     }
     getAllGladiatorLocations(character) {
         const found = [];
         for (var y = 0; y < matrix.length; y++) {
             for (var x = 0; x < matrix[y].length; x++) {
      
-                if (matrix[y][x] == 1) {
+                if (matrix[y][x] instanceof character) {
                     found.push({y: y, x: x})
                 }
             }
@@ -20,11 +21,21 @@ class Gladiator {
         return found;
     }
     chooseRndGladiator(){
-        const gladiatorLocations = this.getAllGladiatorLocations(1);
+        const gladiatorLocations = this.getAllGladiatorLocations(Gladiator);
         const rndGladiator = gladiatorLocations[Math.floor(Math.random()*gladiatorLocations.length)]
-        console.log(rndGladiator);
+        return rndGladiator;
     }
-    hit() {
 
+    caesarDecision(){
+        const arr = [true,false];
+        return arr[Math.floor(Math.random()*arr.length)]
+    }
+    murder(x,y){
+        matrix[y][x] = 0;
+        for (let i in gladiatorsArr) {
+            if (x == gladiatorsArr[i].x && y == gladiatorsArr[i].y) {
+                gladiatorsArr.splice(i, 1);
+            }
+        }
     }
 }
