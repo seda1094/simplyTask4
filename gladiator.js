@@ -25,6 +25,34 @@ class Gladiator {
         const rndGladiator = gladiatorLocations[Math.floor(Math.random()*gladiatorLocations.length)]
         return rndGladiator;
     }
+    hit() {
+        const initial_speed = this.speed
+        const initial_health = this.health
+        this.speed = initial_speed * (this.health / initial_health)
+        this.speedTimer++
+        if(this.speedTimer >= this.speed){
+            const choosenGladiator = this.chooseRndGladiator()
+            console.log(choosenGladiator)
+            for (let i in gladiatorsArr) {
+                if (choosenGladiator.x == gladiatorsArr[i].x && choosenGladiator.y == gladiatorsArr[i].y) {
+                    if(gladiatorsArr[i].health<=0){
+                        alert(this.caesarDecision())
+                        if(this.caesarDecision()){
+                            this.murder(choosenGladiator.x,choosenGladiator.y)
+                        }
+                        else{
+                            gladiatorsArr[i].health = 250
+                        }
+                    }
+                    else{
+                        gladiatorsArr[i].health-=this.power
+                    }
+                }
+            }
+        this.speedTimer = 0
+        }
+
+    }
 
     caesarDecision(){
         const arr = [true,false];
