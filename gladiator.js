@@ -6,59 +6,75 @@ class Gladiator {
         this.health = health;
         this.power = power;
         this.speed = speed;
-        this.speedTimer = 0;
+        this.speedIndicator = this.speed;
+        this.speedLim = 5;
+        this.oponent
+
     }
     getAllGladiatorLocations(character) {
         const found = [];
         for (var y = 0; y < matrix.length; y++) {
             for (var x = 0; x < matrix[y].length; x++) {
-     
+
                 if (matrix[y][x] instanceof character) {
-                    found.push({y: y, x: x})
+                    found.push(matrix[y][x])
                 }
             }
         }
         return found;
     }
-    chooseRndGladiator(){
+    chooseRndGladiator() {
         const gladiatorLocations = this.getAllGladiatorLocations(Gladiator);
-        const rndGladiator = gladiatorLocations[Math.floor(Math.random()*gladiatorLocations.length)]
+        const rndGladiator = gladiatorLocations[Math.floor(Math.random() * gladiatorLocations.length)]
         return rndGladiator;
     }
     hit() {
-        const initial_speed = this.speed
-        const initial_health = this.health
-        this.speed = initial_speed * (this.health / initial_health)
-        this.speedTimer++
-        if(this.speedTimer >= this.speed){
-            const choosenGladiator = this.chooseRndGladiator()
-            console.log(choosenGladiator)
-            for (let i in gladiatorsArr) {
-                if (choosenGladiator.x == gladiatorsArr[i].x && choosenGladiator.y == gladiatorsArr[i].y) {
-                    if(gladiatorsArr[i].health<=0){
-                        alert(this.caesarDecision())
-                        if(this.caesarDecision()){
-                            this.murder(choosenGladiator.x,choosenGladiator.y)
-                        }
-                        else{
-                            gladiatorsArr[i].health = 250
-                        }
-                    }
-                    else{
-                        gladiatorsArr[i].health-=this.power
-                    }
+        this.speedIndicator++
+
+        if (this.speedIndicator == this.speedLim) {
+            this.oponent = this.chooseRndGladiator()
+            if (this.oponent.health <= 0) {
+                const decision = this.caesarDecision()
+                if (decision) {
+                    this.decisionVisualization(decision, this.oponent.name)
+                    this.oponent.health = 250
+                }
+                else {
+                    this.decisionVisualization(decision, this.oponent.name)
+                    this.murder(this.oponent.x, this.oponent.y)
                 }
             }
-        this.speedTimer = 0
+            else {
+                this.oponent.health -= this.power
+            }
+
+            this.speedIndicator = this.speed
         }
 
     }
 
-    caesarDecision(){
-        const arr = [true,false];
-        return arr[Math.floor(Math.random()*arr.length)]
+    caesarDecision() {
+        const arr = [true, false];
+        return arr[Math.floor(Math.random() * arr.length)]
     }
-    murder(x,y){
+    decisionVisualization(decision,name) {
+        const img = document.createElement("img")
+        const p = document.createElement("p")
+        p.innerHTML = name
+
+        if (decision) {
+            img.src = "./img/ok.png"
+        }
+        else
+        {
+            img.src = "./img/murder.png"
+        }
+
+        document.getElementById("decision").appendChild(img)
+        document.getElementById("decision").appendChild(p)
+
+    }
+    murder(x, y) {
         matrix[y][x] = 0;
         for (let i in gladiatorsArr) {
             if (x == gladiatorsArr[i].x && y == gladiatorsArr[i].y) {
