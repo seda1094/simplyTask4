@@ -6,8 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        html,body{
+            width: 100vw;
+            height: 100vh;
+        }
+        body{
+            display: flex;
+        }
         .decision{
-            display: inline-block;
+            /* display: flex;
+            flex-wrap: wrap; */
+            height: 100%;
+            width: 50%;
+            overflow: auto;
+        }
+
+        .decision div{
+        margin: 40px;
+        padding: 10px;
+        height: 50px;
+        
         }
         p{
             font-size: small;
@@ -18,8 +36,9 @@
     </style>
 </head>
 <body>
-<div id="decision" class="decision">
-</div>
+<ul id="decision" class="decision">
+
+</ul>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
     <script src="./gladiator.js"></script>

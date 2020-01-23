@@ -9,7 +9,6 @@ class Gladiator {
         this.speedIndicator = this.speed;
         this.speedLim = 5;
         this.oponent
-
     }
     getAllGladiatorLocations(character) {
         const found = [];
@@ -58,9 +57,10 @@ class Gladiator {
         return arr[Math.floor(Math.random() * arr.length)]
     }
     decisionVisualization(decision,name) {
+        const li = document.createElement("li")
         const img = document.createElement("img")
-        const p = document.createElement("p")
-        p.innerHTML = name
+        const span = document.createElement("span")
+        span.innerHTML = name
 
         if (decision) {
             img.src = "./img/ok.png"
@@ -70,14 +70,16 @@ class Gladiator {
             img.src = "./img/murder.png"
         }
 
-        document.getElementById("decision").appendChild(img)
-        document.getElementById("decision").appendChild(p)
+        li.appendChild(img)
+        li.appendChild(span)
+        document.getElementById("decision").appendChild(li)
 
     }
     murder(x, y) {
         matrix[y][x] = 0;
         for (let i in gladiatorsArr) {
             if (x == gladiatorsArr[i].x && y == gladiatorsArr[i].y) {
+                murderedGladiatorsArr.push(gladiatorsArr[i])
                 gladiatorsArr.splice(i, 1);
             }
         }

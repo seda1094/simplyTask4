@@ -14,6 +14,7 @@ var matrix = [
  
  var side = 100;
  const gladiatorsArr = []
+ const murderedGladiatorsArr = []
  function setup() {
     frameRate(5);
     createCanvas(matrix[0].length * side, matrix.length * side);
@@ -66,7 +67,7 @@ var matrix = [
                  fill("#acacac");
                  rect(x * side, y * side, side, side);
              }
-          
+             console.log(murderedGladiatorsArr);
              
          }
      }
