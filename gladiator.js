@@ -3,6 +3,7 @@ class Gladiator {
         this.x = x;
         this.y = y;
         this.name = name;
+        this.mainHealth = health
         this.health = health;
         this.power = power;
         this.speed = speed;
@@ -14,7 +15,6 @@ class Gladiator {
         const found = [];
         for (var y = 0; y < matrix.length; y++) {
             for (var x = 0; x < matrix[y].length; x++) {
-
                 if (matrix[y][x] instanceof character) {
                     found.push(matrix[y][x])
                 }
@@ -22,15 +22,27 @@ class Gladiator {
         }
         return found;
     }
+
     chooseRndGladiator() {
         const gladiatorLocations = this.getAllGladiatorLocations(Gladiator);
         const rndGladiator = gladiatorLocations[Math.floor(Math.random() * gladiatorLocations.length)]
         return rndGladiator;
     }
-    hit() {
-        this.speedIndicator++
 
-        if (this.speedIndicator == this.speedLim) {
+    trimpleSpeed(){
+        return this.speed * 3;
+    }
+
+    trimpleSpeedChecker(){
+        if(this.health<30 && this.health>0){
+            this.trimpleSpeed()
+        }
+    }
+
+    hit() {
+        this.trimpleSpeedChecker()
+        this.speedIndicator++
+        if (this.speedIndicator >= this.speed) {
             this.oponent = this.chooseRndGladiator()
             if (this.oponent.health <= 0) {
                 const decision = this.caesarDecision()
@@ -46,10 +58,8 @@ class Gladiator {
             else {
                 this.oponent.health -= this.power
             }
-
-            this.speedIndicator = this.speed
+            this.speed = this.speed * (this.health/this.mainHealth)
         }
-
     }
 
     caesarDecision() {

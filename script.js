@@ -1,4 +1,4 @@
-var matrix = [
+const matrix = [
     [0, 0, 1, 0, 0],
     [1, 0, 0, 0, 0],
     [0, 1, 0, 0, 0],
@@ -8,11 +8,14 @@ var matrix = [
     [1, 1, 0, 0, 0]
  ];
  
- function getRndInteger(min, max) {
-     return Math.floor(Math.random() * (max - min + 1) ) + min;
+ function getRndInteger(min, max, fix) {
+     return Math.floor(Math.random() * (max - min + 1)  + min)
    }
- 
- var side = 100;
+   function getRndNumberWithFix(min, max, fix) {
+    return (Math.random() * (max - min + 1)  + min).toFixed(fix)
+  }
+
+ const side = 100;
  const gladiatorsArr = []
  const murderedGladiatorsArr = []
  function setup() {
@@ -23,7 +26,7 @@ var matrix = [
     for(var y = 0; y < matrix.length; ++y){
      for(var x = 0; x < matrix[y].length; ++x){
          if(matrix[y][x] == 1){
-             const gladiator = new Gladiator(x,y,faker.name.lastName(),getRndInteger(80,100),getRndInteger(2,5),1);
+             const gladiator = new Gladiator(x,y,faker.name.lastName(),getRndInteger(80,100),getRndNumberWithFix(2,5,1),getRndNumberWithFix(1,5,3));
              matrix[y][x] = gladiator;
              gladiatorsArr.push(gladiator);
          }	
@@ -33,15 +36,15 @@ var matrix = [
  
  function draw() {
  
-     for (var y = 0; y < matrix.length; y++) {
-         for (var x = 0; x < matrix[y].length; x++) {
+     for (let y = 0; y < matrix.length; y++) {
+         for (let x = 0; x < matrix[y].length; x++) {
   
              if (matrix[y][x] instanceof  Gladiator) {
                  fill(matrix[y][x].speed*40,255,0);
                  rect(x * side, y * side, side/2, side/2);
  
                  fill(0,0,0);
-                 text(matrix[y][x].power, x * side+5, y * side+15)
+                 text(matrix[y][x].speed, x * side+5, y * side+15)
  
                  fill(matrix[y][x].power*40,0,255);
                  rect(x * side+side/2, y * side, side/2, side/2);
@@ -60,15 +63,12 @@ var matrix = [
  
                  if (matrix[y][x].oponent) {
                      text(matrix[y][x].oponent.name, x * side, y * side+side/2+30)
-                 }
-
+                 }   
              }
              else if (matrix[y][x] == 0) {
                  fill("#acacac");
                  rect(x * side, y * side, side, side);
              }
-             console.log(murderedGladiatorsArr);
-             
          }
      }
      for(const i in gladiatorsArr){
