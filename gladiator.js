@@ -1,20 +1,20 @@
 //This is class Gladiator,,the main character of my game
 class Gladiator {
     constructor(x, y, name, health, power, speed) {
-        this.x = x;
-        this.y = y;
+        this.x = x
+        this.y = y
         this.name = name;
         this.mainHealth = health
-        this.health = health;
-        this.power = power;
-        this.speed = speed;
-        this.speedIndicator = 0;
-        this.speedLim = 5;
+        this.health = health
+        this.power = power
+        this.speed = speed
+        this.speedIndicator = 0
+        this.speedLim = 5
         this.oponent
     }
     //For Fighting with someone,, my character have to find all GLADIATORS  
     getAllGladiators(character) {
-        const found = [];
+        const found = []
         for (var y = 0; y < matrix.length; y++) {
             for (var x = 0; x < matrix[y].length; x++) {
                 if (matrix[y][x] instanceof character) {
@@ -22,7 +22,7 @@ class Gladiator {
                 }
             }
         }
-        return found;
+        return found
     }
 
     //Here my gladiator choose randomly a gladiator
@@ -30,12 +30,12 @@ class Gladiator {
     chooseRndGladiator() {
         const allGladiators = this.getAllGladiators(Gladiator);
         const rndGladiator = allGladiators[Math.floor(Math.random() * allGladiators.length)]
-        return rndGladiator;
+        return rndGladiator
     }
 
     // For some cases speed of my gladiator must be trimpled,,this method for that
     trimpleSpeed() {
-        return this.speed * 3;
+        return this.speed * 3
     }
 
     // This is case ,,when thw speed must be trimpled
@@ -48,7 +48,7 @@ class Gladiator {
 
     //Caesar Decision whit random booleans
     caesarDecision() {
-        const arr = [true, false];
+        const arr = [true, false]
         return arr[Math.floor(Math.random() * arr.length)]
     }
 
@@ -74,11 +74,11 @@ class Gladiator {
 
     //Oponoent die
     murder(x, y) {
-        matrix[y][x] = 0;
+        matrix[y][x] = 0
         for (let i in gladiatorsArr) {
             if (x == gladiatorsArr[i].x && y == gladiatorsArr[i].y) {
                 murderedGladiatorsArr.push(gladiatorsArr[i])
-                gladiatorsArr.splice(i, 1);
+                gladiatorsArr.splice(i, 1)
             }
         }
     }
