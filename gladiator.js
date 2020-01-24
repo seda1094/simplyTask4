@@ -17,7 +17,7 @@ class Gladiator {
     getAllPossibleGladiators() {
         let found = [];
         found = gladiatorsArr.filter(item => item.x !== this.x && item.y !== this.y)
-        return found
+        return gladiatorsArr
     }
 
     //Here my gladiator choose randomly a gladiator

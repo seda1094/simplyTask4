@@ -25,6 +25,13 @@ function getRndNumberWithFix(min, max, fix) {
     return (Math.random() * (max - min + 1) + min).toFixed(fix)
 }
 
+function gameOver() {
+    if(gladiatorsArr.length<=1){
+        noLoop();
+        alert(gladiatorsArr[0].name + " " + gladiatorsArr[0].health)
+    }
+}
+
 function vizualization(matrix) {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
@@ -81,6 +88,7 @@ function setup() {
 
 //Draw working in setInterval ,,,and frameRate is installing in setup function
 function draw() {
+    gameOver()
     vizualization(matrix)
     //calling fit method aff all gladiators
     for (const i in gladiatorsArr) {
