@@ -1,11 +1,11 @@
 //Main matrix
 const matrix = [
-    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0],
+    [0, 1, 0, 1, 0],
     [0, 0, 0, 0, 0],
     [0, 1, 0, 0, 0],
-    [0, 1, 0, 0, 0],
+    [0, 1, 0, 1, 0],
     [0, 1, 0, 0, 0]
 ]
 //size of my matrix item
@@ -71,7 +71,7 @@ function vizualization(matrix) {
 
 //in setup function is all my settongs for drawing
 function setup() {
-    frameRate(5)
+    frameRate(1000)
     createCanvas(matrix[0].length * side, matrix.length * side)
     background('#acacac');
 
@@ -92,7 +92,7 @@ function draw() {
     vizualization(matrix)
     //calling fit method aff all gladiators
     for (const i in gladiatorsArr) {
-        gladiatorsArr[i].hit()
+        gladiatorsArr[i].hit(gladiatorsArr)
     }
 
 }

@@ -13,23 +13,19 @@ class Gladiator {
         this.oponent
     }
 
-    //For Fighting with someone,, my character have to find all GLADIATORS  
-    getAllPossibleGladiators() {
-        let found = [];
-        found = gladiatorsArr.filter(item => item.x !== this.x && item.y !== this.y)
+    //For Fighting with someone,, my character have to find all GLADIATORS besides himself  
+    getAllPossibleGladiators(gladiatorsArr) {
+        const found = gladiatorsArr.filter(item => item.x !== this.x && item.y !== this.y)
         return gladiatorsArr
     }
 
     //Here my gladiator choose randomly a gladiator
     //TODO mistake,,,my gladiator can choose himself,,,
-    chooseRndGladiator() {
-        const possibleGladiators = this.getAllPossibleGladiators()
+    chooseRndGladiator(gladiatorsArr) {
+        const possibleGladiators = this.getAllPossibleGladiators(gladiatorsArr)
         console.log(gladiatorsArr)
         console.log(possibleGladiators)
-        if(gladiatorsArr.length <= 1){
-            alert("game over")
-        }
-        else{
+        if(possibleGladiators.length >= 2){
             const rndGladiator = possibleGladiators[Math.floor(Math.random() * possibleGladiators.length)]
             return rndGladiator
         }
@@ -86,11 +82,12 @@ class Gladiator {
 
     //Hit function the main function,,where is calling all methods
     //Here is settings of speed
-    hit() {
+    hit(gladiatorsArr) {
+
         this.trimpleSpeedChecker()
         this.speedIndicator++
         if (this.speedIndicator >= this.speed) {
-            this.oponent = this.chooseRndGladiator()
+            this.oponent = this.chooseRndGladiator(gladiatorsArr)
             //caesar decision
             if (this.oponent) {
                 if (this.oponent.health <= 0) {
