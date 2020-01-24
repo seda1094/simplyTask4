@@ -12,25 +12,27 @@ class Gladiator {
         this.speedLim = 5
         this.oponent
     }
+
     //For Fighting with someone,, my character have to find all GLADIATORS  
-    getAllGladiators(character) {
-        const found = []
-        for (var y = 0; y < matrix.length; y++) {
-            for (var x = 0; x < matrix[y].length; x++) {
-                if (matrix[y][x] instanceof character) {
-                    found.push(matrix[y][x])
-                }
-            }
-        }
+    getAllPossibleGladiators() {
+        let found = [];
+        found = gladiatorsArr.filter(item => item.x !== this.x && item.y !== this.y)
         return found
     }
 
     //Here my gladiator choose randomly a gladiator
     //TODO mistake,,,my gladiator can choose himself,,,
     chooseRndGladiator() {
-        const allGladiators = this.getAllGladiators(Gladiator);
-        const rndGladiator = allGladiators[Math.floor(Math.random() * allGladiators.length)]
-        return rndGladiator
+        const possibleGladiators = this.getAllPossibleGladiators()
+        console.log(gladiatorsArr)
+        console.log(possibleGladiators)
+        if(gladiatorsArr.length <= 1){
+            alert("game over")
+        }
+        else{
+            const rndGladiator = possibleGladiators[Math.floor(Math.random() * possibleGladiators.length)]
+            return rndGladiator
+        }
     }
 
     // For some cases speed of my gladiator must be trimpled,,this method for that
@@ -69,7 +71,6 @@ class Gladiator {
         li.appendChild(img)
         li.appendChild(span)
         document.getElementById("decision").appendChild(li)
-
     }
 
     //Oponoent die
@@ -91,22 +92,24 @@ class Gladiator {
         if (this.speedIndicator >= this.speed) {
             this.oponent = this.chooseRndGladiator()
             //caesar decision
-            if (this.oponent.health <= 0) {
-                const decision = this.caesarDecision()
-                //oponent reborn
-                if (decision) {
-                    this.decisionVisualization(decision, this.oponent.name)
-                    this.oponent.health = 250
+            if (this.oponent) {
+                if (this.oponent.health <= 0) {
+                    const decision = this.caesarDecision()
+                    //oponent reborn
+                    if (decision) {
+                        this.decisionVisualization(decision, this.oponent.name)
+                        this.oponent.health = 250
+                    }
+                    //method murder
+                    else {
+                        this.decisionVisualization(decision, this.oponent.name)
+                        this.murder(this.oponent.x, this.oponent.y)
+                    }
                 }
-                //method murder
+                //hitting oponent and decrease his health
                 else {
-                    this.decisionVisualization(decision, this.oponent.name)
-                    this.murder(this.oponent.x, this.oponent.y)
+                    this.oponent.health -= this.power
                 }
-            }
-            //hitting oponent and decrease his health
-            else {
-                this.oponent.health -= this.power
             }
             //speed updating
             this.speed = this.speed * (this.health / this.mainHealth)

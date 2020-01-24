@@ -1,12 +1,12 @@
 //Main matrix
 const matrix = [
-    [0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0],
     [1, 0, 0, 0, 0],
     [0, 1, 0, 0, 0],
-    [0, 0, 1, 0, 0],
-    [1, 1, 0, 0, 0],
-    [1, 1, 0, 0, 0],
-    [1, 1, 0, 0, 0]
+    [0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0]
 ]
 //size of my matrix item
 const side = 80
@@ -25,28 +25,9 @@ function getRndNumberWithFix(min, max, fix) {
     return (Math.random() * (max - min + 1) + min).toFixed(fix)
 }
 
-//in setup function is all my settongs for drawing
-function setup() {
-    frameRate(5)
-    createCanvas(matrix[0].length * side, matrix.length * side)
-    background('#acacac');
-
-    for (var y = 0; y < matrix.length; ++y) {
-        for (var x = 0; x < matrix[y].length; ++x) {
-            if (matrix[y][x] == 1) {
-                const gladiator = new Gladiator(x, y, faker.name.lastName(), getRndInteger(80, 100), getRndNumberWithFix(2, 5, 1), getRndNumberWithFix(1, 5, 3))
-                matrix[y][x] = gladiator
-                gladiatorsArr.push(gladiator)
-            }
-        }
-    }
-}
-
-//Draw working in setInterval ,,,and frameRate is installing in setup function
-function draw() {
+function vizualization(matrix) {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
-
             if (matrix[y][x] instanceof Gladiator) {
                 fill(matrix[y][x].speed * 40, 255, 0)
                 rect(x * side, y * side, side / 2, side / 2);
@@ -79,6 +60,28 @@ function draw() {
             }
         }
     }
+}
+
+//in setup function is all my settongs for drawing
+function setup() {
+    frameRate(5)
+    createCanvas(matrix[0].length * side, matrix.length * side)
+    background('#acacac');
+
+    for (let y = 0; y < matrix.length; ++y) {
+        for (let x = 0; x < matrix[y].length; ++x) {
+            if (matrix[y][x] == 1) {
+                const gladiator = new Gladiator(x, y, faker.name.lastName(), getRndInteger(80, 100), getRndNumberWithFix(2, 5, 1), getRndNumberWithFix(1, 5, 3))
+                matrix[y][x] = gladiator
+                gladiatorsArr.push(gladiator)
+            }
+        }
+    }
+}
+
+//Draw working in setInterval ,,,and frameRate is installing in setup function
+function draw() {
+    vizualization(matrix)
     //calling fit method aff all gladiators
     for (const i in gladiatorsArr) {
         gladiatorsArr[i].hit()
