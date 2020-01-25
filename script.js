@@ -71,7 +71,7 @@ function vizualization(matrix) {
 
 //in setup function is all my settongs for drawing
 function setup() {
-    frameRate(1000)
+    frameRate(10)
     createCanvas(matrix[0].length * side, matrix.length * side)
     background('#acacac');
 

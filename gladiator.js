@@ -21,7 +21,7 @@ class Gladiator {
 
     //Here my gladiator choose randomly a gladiator
     //TODO mistake,,,my gladiator can choose himself,,,
-    chooseRndGladiator(gladiatorsArr) {
+    chooseRndGladiator() {
         const possibleGladiators = this.getAllPossibleGladiators(gladiatorsArr)
         console.log(gladiatorsArr)
         console.log(possibleGladiators)
@@ -82,7 +82,7 @@ class Gladiator {
 
     //Hit function the main function,,where is calling all methods
     //Here is settings of speed
-    hit(gladiatorsArr) {
+    hit() {
 
         this.trimpleSpeedChecker()
         this.speedIndicator++
