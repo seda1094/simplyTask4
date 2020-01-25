@@ -89,6 +89,8 @@ function setup() {
 
 //Draw working in setInterval ,,,and frameRate is installing in setup function
 function draw() {
+    // console.log(gladiatorsArr);
+    
     gameOver()
     vizualization(matrix)
     //calling fit method aff all gladiators

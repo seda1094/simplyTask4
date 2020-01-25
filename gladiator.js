@@ -14,8 +14,8 @@ class Gladiator {
 
     //TODO: For Fighting with someone,, my character have to find all GLADIATORS besides himself  
     getAllPossibleGladiators(gladiatorsArr) {
-        const found = gladiatorsArr.filter(item => item.x !== this.x && item.y !== this.y)
-        return gladiatorsArr
+        const found = gladiatorsArr.filter(item => this != item)
+        return found
     }
 
     //Here my gladiator choose randomly a gladiator
@@ -23,8 +23,10 @@ class Gladiator {
     chooseRndGladiator() {
         const possibleGladiators = this.getAllPossibleGladiators(gladiatorsArr)
         console.log(gladiatorsArr)
+        console.log("pppp");
+        
         console.log(possibleGladiators)
-        if(possibleGladiators.length >= 2){
+        if(possibleGladiators.length){
             const rndGladiator = possibleGladiators[Math.floor(Math.random() * possibleGladiators.length)]
             return rndGladiator
         }
