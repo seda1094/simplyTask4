@@ -13,7 +13,7 @@ class Gladiator {
         this.oponent
     }
 
-    //For Fighting with someone,, my character have to find all GLADIATORS besides himself  
+    //TODO: For Fighting with someone,, my character have to find all GLADIATORS besides himself  
     getAllPossibleGladiators(gladiatorsArr) {
         const found = gladiatorsArr.filter(item => item.x !== this.x && item.y !== this.y)
         return gladiatorsArr

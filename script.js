@@ -32,6 +32,7 @@ function gameOver() {
     }
 }
 
+//canvas vizualization
 function vizualization(matrix) {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
@@ -92,7 +93,7 @@ function draw() {
     vizualization(matrix)
     //calling fit method aff all gladiators
     for (const i in gladiatorsArr) {
-        gladiatorsArr[i].hit(gladiatorsArr)
+        gladiatorsArr[i].hit()
     }
 
 }
