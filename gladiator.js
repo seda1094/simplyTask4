@@ -9,7 +9,6 @@ class Gladiator {
         this.power = power
         this.speed = speed
         this.speedIndicator = 0
-        this.speedLim = 5
         this.oponent
     }
 
