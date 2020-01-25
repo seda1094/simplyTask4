@@ -12,14 +12,14 @@ class Gladiator {
         this.oponent
     }
 
-    //TODO: For Fighting with someone,, my character have to find all GLADIATORS besides himself  
+    // For Fighting with someone,, my character have to find all GLADIATORS besides himself  
     getAllPossibleGladiators(gladiatorsArr) {
         const found = gladiatorsArr.filter(item => this != item)
         return found
     }
 
     //Here my gladiator choose randomly a gladiator
-    //TODO mistake,,,my gladiator can choose himself,,,
+    // Mistake,,,my gladiator can choose himself,,,
     chooseRndGladiator() {
         const possibleGladiators = this.getAllPossibleGladiators(gladiatorsArr)
         console.log(gladiatorsArr)
